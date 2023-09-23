@@ -4,7 +4,7 @@ import Public from './components/Public'
 import Login from './features/auth/Login';
 import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
-import ClinicsList from './features/users/ClinicsList'
+import AppointmentsList from './features/appointments/AppointmentsList'
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
 
           <Route index element={<Welcome />} />
 
-          <Route path="clinics">
-            <Route index element={<ClinicsList />} />
+          <Route path="appointment">
+            <Route index element={<AppointmentsList />} />
           </Route>
         
         </Route> {/* End Dash */}
