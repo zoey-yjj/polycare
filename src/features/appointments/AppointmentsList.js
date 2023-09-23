@@ -8,7 +8,7 @@ const appointmentsList = () => {
         isSuccess,
         isError,
         error
-    } = useGetAppointmentsQuery()
+    } = UseGetAppointmentsQuery()
 
     let content
 

@@ -33,7 +33,7 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetAppointmentsQuery,
+    UseGetAppointmentsQuery,
 } = appointmentsApiSlice
 
 // returns the query result object
