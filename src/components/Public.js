@@ -10,7 +10,7 @@ const Public = () => {
                 </nav>
             </header>
             <main className="public__main">
-                <p>Make appointment for clinics.</p>
+                <p>Make appointment with our clinics.</p>
             </main>
             <footer>
                 <p>If you require any assistance, please feel free to reach out to us at +65 1234-5678.</p>
