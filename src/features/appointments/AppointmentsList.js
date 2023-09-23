@@ -1,4 +1,4 @@
-import { useGetAppointmentsQuery } from "./appointmentsApiSlice"
+import { UseGetAppointmentsQuery } from "./appointmentsApiSlice"
 import Appointment from "./Appointment"
 
 const appointmentsList = () => {
