@@ -19,6 +19,8 @@ function App() {
 
           <Route path="appointment">
             <Route index element={<AppointmentsList />} />
+            <Route path=":id" element={<EditAppoinment />} />
+            <Route path="new" element={<NewAppoinment />} />
           </Route>
         
         </Route> {/* End Dash */}
