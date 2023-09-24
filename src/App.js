@@ -6,6 +6,7 @@ import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
 import AppointmentsList from './features/appointments/AppointmentsList'
 import EditAppointment from './features/appointments/EditAppointment'
+import NewAppointment from './features/appointments/NewAppointment'
 import Prefetch from './features/auth/Prefetch'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
             <Route path="appointment">
               <Route index element={<AppointmentsList />} />
               <Route path=":id" element={<EditAppointment />} />
+              <Route path="new" element={<NewAppointment />} />
             </Route>
           
           </Route> {/* End Dash */}

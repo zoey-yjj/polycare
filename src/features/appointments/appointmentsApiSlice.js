@@ -30,6 +30,18 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
                 } else return [{ type: 'Appoinment', id: 'LIST' }]
             }
         }),
+        addNewAppointment: builder.mutation({
+            query: initialAppointment => ({
+                url: '/appointments',
+                method: 'POST',
+                body: {
+                    ...initialAppointment,
+                }
+            }),
+            invalidatesTags: [
+                { type: 'Appointment', id: "LIST" }
+            ]
+        }),
         updateAppointment: builder.mutation({
             query: initialAppointment => ({
                 url: '/appointments',
@@ -57,6 +69,7 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
 
 export const {
     useGetAppointmentsQuery,
+    useAddNewAppointmentMutation,
     useUpdateAppointmentMutation,
     useDeleteAppointmentMutation,
 } = appointmentsApiSlice
