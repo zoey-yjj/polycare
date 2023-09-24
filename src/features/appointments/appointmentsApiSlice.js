@@ -8,11 +8,12 @@ const initialState = appointmentsAdapter.getInitialState()
 export const appointmentsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({
         getAppointments: builder.query({
-            query: () => '/appointments',
-            validateStatus: (response, result) => {
-                return response.status === 200 && !result.isError
-            },
-            keepUnusedDataFor: 5,
+            query: () => ({
+                url: '/appointments',
+                validateStatus: (response, result) => {
+                    return response.status === 200 && !result.isError
+                },
+            }),
             transformResponse: responseData => {
                 const loadedAppointments = responseData.map(appointment => {
                     appointment.id = appointment._id
@@ -33,7 +34,7 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    UseGetAppointmentsQuery,
+    useGetAppointmentsQuery,
 } = appointmentsApiSlice
 
 // returns the query result object

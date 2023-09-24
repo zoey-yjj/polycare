@@ -1,14 +1,14 @@
-import { UseGetAppointmentsQuery } from "./appointmentsApiSlice"
+import { useGetAppointmentsQuery } from "./appointmentsApiSlice"
 import Appointment from "./Appointment"
 
-const appointmentsList = () => {
+const AppointmentsList = () => {
     const {
         data: appointments,
         isLoading,
         isSuccess,
         isError,
         error
-    } = UseGetAppointmentsQuery()
+    } = useGetAppointmentsQuery()
 
     let content
 
@@ -44,4 +44,4 @@ const appointmentsList = () => {
 
     return content
 }
-export default appointmentsList
+export default AppointmentsList
