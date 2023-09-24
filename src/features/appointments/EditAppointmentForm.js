@@ -17,14 +17,12 @@ const EditAppointmentForm = ({ appointment }) => {
 
     const navigate = useNavigate()
 
-    const [username, setUsername] = useState(appointment.username)
     const [clinic, setClinic] = useState(appointment.clinic)
     const [time, setTime] = useState(appointment.time)
 
     useEffect(() => {
 
         if (isSuccess) {
-            setUsername('')
             setClinic('')
             setTime('')
             navigate('/dash/appointment')
@@ -35,11 +33,11 @@ const EditAppointmentForm = ({ appointment }) => {
     const onClinicChanged = e => setClinic(e.target.value)
     const onTimeChanged = e => setTime(e.target.value)
 
-    const canSave = [username, clinic, time].every(Boolean) && !isLoading
+    const canSave = [clinic, time].every(Boolean) && !isLoading
 
     const onSaveAppointmentClicked = async (e) => {
         if (canSave) {
-            await updateAppointment({ id: appointment.id, clinic, time })
+            await updateAppointment({ id: appointment.id, user: appointment.user, clinic, timeStr: time })
         }
     }
 
@@ -60,7 +58,7 @@ const EditAppointmentForm = ({ appointment }) => {
 
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__username-row">
-                    <h2>Edit Appointment for {username}</h2>
+                    <h2>Edit Appointment for {appointment.user}</h2>
                 </div>
 
                 <div className="form__row">
