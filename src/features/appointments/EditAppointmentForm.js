@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import { useUpdateAppointmentMutation } from "./appointmentsApiSlice"
-// import { useUpdateAppointmentMutation, useDeleteAppointmentMutation } from "./appointmentsApiSlice"
+import { useUpdateAppointmentMutation, useDeleteAppointmentMutation } from "./appointmentsApiSlice"
 import { CLINICS } from "../../config/clinics"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -15,6 +14,12 @@ const EditAppointmentForm = ({ appointment }) => {
         error
     }] = useUpdateAppointmentMutation()
 
+    const [deleteAppointment, {
+        isSuccess: isDelSuccess,
+        isError: isDelError,
+        error: delerror
+    }] = useDeleteAppointmentMutation()
+
     const navigate = useNavigate()
 
     const [clinic, setClinic] = useState(appointment.clinic)
@@ -22,13 +27,13 @@ const EditAppointmentForm = ({ appointment }) => {
 
     useEffect(() => {
 
-        if (isSuccess) {
+        if (isSuccess || isDelSuccess) {
             setClinic('')
             setTime('')
             navigate('/dash/appointment')
         }
 
-    }, [isSuccess, navigate])
+    }, [isSuccess, isDelSuccess, navigate])
 
     const onClinicChanged = e => setClinic(e.target.value)
     const onTimeChanged = e => setTime(e.target.value)
@@ -41,16 +46,20 @@ const EditAppointmentForm = ({ appointment }) => {
         }
     }
 
+    const onDeleteNoteClicked = async () => {
+        await deleteAppointment({ id: appointment.id })
+    }
+
     const options = CLINICS.map(opt => {
         return (
             <option key={opt.id} value={opt.name} > {opt.name} </option >
         )
     })
 
-    const errClass = (isError) ? "errmsg" : "offscreen"
+    const errClass = (isError || isDelError) ? "errmsg" : "offscreen"
     const validTimeClass = !time ? "form__input--incomplete" : ''
 
-    const errContent = (error?.data?.message) ?? ''
+    const errContent = (error?.data?.message || delerror?.data?.message) ?? ''
 
         const content = (
         <>
@@ -58,7 +67,7 @@ const EditAppointmentForm = ({ appointment }) => {
 
             <form className="form" onSubmit={e => e.preventDefault()}>
                 <div className="form__username-row">
-                    <h2>Edit Appointment for {appointment.user}</h2>
+                    <h2>Edit Appointment</h2>
                 </div>
 
                 <div className="form__row">
@@ -77,7 +86,7 @@ const EditAppointmentForm = ({ appointment }) => {
                     </div>
                 </div>
 
-                <label className="form__label" htmlFor="note-title">
+                <label className="form__label" htmlFor="appointment-time">
                     Time:</label>
                 <input
                     className={`form__input ${validTimeClass}`}
@@ -98,6 +107,13 @@ const EditAppointmentForm = ({ appointment }) => {
                             disabled={!canSave}
                         >
                             <FontAwesomeIcon icon={faSave} />
+                        </button>
+                        <button
+                            className="icon-button"
+                            title="Delete"
+                            onClick={onDeleteNoteClicked}
+                        >
+                            <FontAwesomeIcon icon={faTrashCan} />
                         </button>
                     </div> 
                 </div>

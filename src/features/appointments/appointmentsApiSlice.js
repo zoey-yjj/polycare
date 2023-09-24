@@ -42,12 +42,23 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
                 { type: 'Appointment', id: arg.id }
             ]
         }),
+        deleteAppointment: builder.mutation({
+            query: ({ id }) => ({
+                url: `/appointments`,
+                method: 'DELETE',
+                body: { id }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Appointment', id: arg.id }
+            ]
+        }),
     }),
 })
 
 export const {
     useGetAppointmentsQuery,
     useUpdateAppointmentMutation,
+    useDeleteAppointmentMutation,
 } = appointmentsApiSlice
 
 // returns the query result object
