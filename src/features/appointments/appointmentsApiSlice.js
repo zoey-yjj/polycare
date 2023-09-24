@@ -30,11 +30,24 @@ export const appointmentsApiSlice = apiSlice.injectEndpoints({
                 } else return [{ type: 'Appoinment', id: 'LIST' }]
             }
         }),
+        updateAppointment: builder.mutation({
+            query: initialAppointment => ({
+                url: '/appointments',
+                method: 'PATCH',
+                body: {
+                    ...initialAppointment,
+                }
+            }),
+            invalidatesTags: (result, error, arg) => [
+                { type: 'Appointment', id: arg.id }
+            ]
+        }),
     }),
 })
 
 export const {
     useGetAppointmentsQuery,
+    useUpdateAppointmentMutation,
 } = appointmentsApiSlice
 
 // returns the query result object

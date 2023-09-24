@@ -5,6 +5,8 @@ import Login from './features/auth/Login';
 import DashLayout from './components/DashLayout'
 import Welcome from './features/auth/Welcome'
 import AppointmentsList from './features/appointments/AppointmentsList'
+import EditAppointment from './features/appointments/EditAppointment'
+import Prefetch from './features/auth/Prefetch'
 
 function App() {
   return (
@@ -13,17 +15,18 @@ function App() {
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
 
-        <Route path="dash" element={<DashLayout />}>
+        <Route element={<Prefetch />}>
+          <Route path="dash" element={<DashLayout />}>
 
-          <Route index element={<Welcome />} />
+            <Route index element={<Welcome />} />
 
-          <Route path="appointment">
-            <Route index element={<AppointmentsList />} />
-            <Route path=":id" element={<EditAppoinment />} />
-            <Route path="new" element={<NewAppoinment />} />
-          </Route>
-        
-        </Route> {/* End Dash */}
+            <Route path="appointment">
+              <Route index element={<AppointmentsList />} />
+              <Route path=":id" element={<EditAppointment />} />
+            </Route>
+          
+          </Route> {/* End Dash */}
+        </Route> {/* End Prefetch */}
 
       </Route>
     </Routes>

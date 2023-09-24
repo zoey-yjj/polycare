@@ -13,7 +13,7 @@ const Appointment = ({ appointmentId }) => {
     if (appointment) {
         const time = new Date(appointment.time).toLocaleString('en-US')
 
-        const handleEdit = () => navigate(`/dash/appointments/${appointmentId}`)
+        const handleEdit = () => navigate(`/dash/appointment/${appointmentId}`)
 
         return (
             <tr className="table__row">
