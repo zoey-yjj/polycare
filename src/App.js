@@ -8,6 +8,7 @@ import AppointmentsList from './features/appointments/AppointmentsList'
 import EditAppointment from './features/appointments/EditAppointment'
 import NewAppointment from './features/appointments/NewAppointment'
 import Prefetch from './features/auth/Prefetch'
+import PersistLogin from './features/auth/PersistLogin';
 
 function App() {
   return (
@@ -16,19 +17,21 @@ function App() {
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
 
-        <Route element={<Prefetch />}>
-          <Route path="dash" element={<DashLayout />}>
+        <Route element={<PersistLogin />}>
+          <Route element={<Prefetch />}>
+            <Route path="dash" element={<DashLayout />}>
 
-            <Route index element={<Welcome />} />
+              <Route index element={<Welcome />} />
 
-            <Route path="appointment">
-              <Route index element={<AppointmentsList />} />
-              <Route path=":id" element={<EditAppointment />} />
-              <Route path="new" element={<NewAppointment />} />
-            </Route>
-          
-          </Route> {/* End Dash */}
-        </Route> {/* End Prefetch */}
+              <Route path="appointment">
+                <Route index element={<AppointmentsList />} />
+                <Route path=":id" element={<EditAppointment />} />
+                <Route path="new" element={<NewAppointment />} />
+              </Route>
+            
+            </Route> {/* End Dash */}
+          </Route> {/* End Prefetch */}
+        </Route> {/* End PersistLogin */}
 
       </Route>
     </Routes>
