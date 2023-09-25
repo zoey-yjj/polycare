@@ -9,6 +9,8 @@ import EditAppointment from './features/appointments/EditAppointment'
 import NewAppointment from './features/appointments/NewAppointment'
 import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin';
+import RequireAuth from './features/auth/RequireAuth'
+import { ROLES } from './config/roles'
 
 function App() {
   return (
@@ -18,19 +20,23 @@ function App() {
         <Route path="login" element={<Login />} />
 
         <Route element={<PersistLogin />}>
-          <Route element={<Prefetch />}>
-            <Route path="dash" element={<DashLayout />}>
+          <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
 
-              <Route index element={<Welcome />} />
+            <Route element={<Prefetch />}>
+              <Route path="dash" element={<DashLayout />}>
 
-              <Route path="appointment">
-                <Route index element={<AppointmentsList />} />
-                <Route path=":id" element={<EditAppointment />} />
-                <Route path="new" element={<NewAppointment />} />
-              </Route>
-            
-            </Route> {/* End Dash */}
-          </Route> {/* End Prefetch */}
+                <Route index element={<Welcome />} />
+
+                <Route path="appointment">
+                  <Route index element={<AppointmentsList />} />
+                  <Route path=":id" element={<EditAppointment />} />
+                  <Route path="new" element={<NewAppointment />} />
+                </Route>
+              
+              </Route> {/* End Dash */}
+            </Route> {/* End Prefetch */}
+
+          </Route> {/* End RequireAuth */}
         </Route> {/* End PersistLogin */}
 
       </Route>
