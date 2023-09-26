@@ -13,6 +13,7 @@ import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth'
 import { ROLES } from './config/roles'
+import NewUserForm from './features/users/NewUserForm';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/" element={<Layout />}>
         <Route index element={<Public />} />
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<NewUserForm />} />
 
         <Route element={<PersistLogin />}>
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>

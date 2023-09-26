@@ -24,12 +24,14 @@ const NewAppointmentForm = ({ users }) => {
         if (isSuccess) {
             setClinic('')
             setTime('')
+            setUserId('')
             navigate('/dash/appointment')
         }
     }, [isSuccess, navigate])
 
     const onClinicChanged = e => setClinic(e.target.value)
     const onTimeChanged = e => setTime(e.target.value)
+    const onUserIDChanged = e => setUserId(e.target.value)
 
     const canSave = [clinic, time].every(Boolean) && !isLoading
 
@@ -65,14 +67,14 @@ const NewAppointmentForm = ({ users }) => {
                 </div>
                 <div className="form__row">
                     <div className="form__divider">
-                        <label className="form__label form__checkbox-container" htmlFor="appointment-users">
-                            Select User:</label>
+                        <label className="form__label form__checkbox-container" htmlFor="appointment-userid">
+                            Select UserID:</label>
                         <select
-                            id="appointment-users"
-                            name="users"
+                            id="appointment-userid"
+                            name="usersid"
                             className="form__select"
-                            value={users}
-                            onChange={onClinicChanged}
+                            value={userId}
+                            onChange={onUserIDChanged}
                         >
                             {user_options}
                         </select>

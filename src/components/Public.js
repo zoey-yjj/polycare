@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRegistered, faPencilAlt } from "@fortawesome/free-solid-svg-icons"
 
 const Public = () => {
     const content = (
@@ -6,7 +8,11 @@ const Public = () => {
             <header>
                 <h1>Welcome to <span className="nowrap">PolyCare!</span></h1>
                 <nav className="dash-header__nav">
-                    <Link to="/login">User Login</Link>
+                    <FontAwesomeIcon icon={faPencilAlt} />
+                    <Link to="/login"> User Login </Link>
+                    
+                    <FontAwesomeIcon icon={faRegistered} />
+                    <Link to="/register"> Register </Link>
                 </nav>
             </header>
             <main className="public__main">
