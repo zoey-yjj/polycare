@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate, Link } from 'react-router-dom'
 import { useAddNewUserMutation } from "./usersApiSlice"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSave } from "@fortawesome/free-solid-svg-icons"
 
 const USER_REGEX = /^[A-z]{3,20}$/
 const UID_REGEX = /^[A-Z][0-9]{6}[A-Z]$/
@@ -129,15 +127,7 @@ const NewUserForm = () => {
                     </div>
 
                     <div className="form__divider">
-                        <div className="form__action-buttons">
-                            <button
-                                className="icon-button"
-                                title="Save"
-                                disabled={!canSave}
-                            >
-                                <FontAwesomeIcon icon={faSave} />
-                            </button>
-                        </div>
+                        <button className="form__submit-button">Register</button>
                     </div>
 
                 </form>

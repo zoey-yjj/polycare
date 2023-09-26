@@ -4,6 +4,9 @@ import { CLINICS } from "../../config/clinics"
 import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faTrashCan } from "@fortawesome/free-solid-svg-icons"
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 
 const EditAppointmentForm = ({ appointment }) => {
 
@@ -25,6 +28,8 @@ const EditAppointmentForm = ({ appointment }) => {
     const [clinic, setClinic] = useState(appointment.clinic)
     const [time, setTime] = useState(appointment.time)
 
+    console.log("time ", time)
+
     useEffect(() => {
 
         if (isSuccess || isDelSuccess) {
@@ -36,7 +41,6 @@ const EditAppointmentForm = ({ appointment }) => {
     }, [isSuccess, isDelSuccess, navigate])
 
     const onClinicChanged = e => setClinic(e.target.value)
-    const onTimeChanged = e => setTime(e.target.value)
 
     const canSave = [clinic, time].every(Boolean) && !isLoading
 
@@ -88,15 +92,16 @@ const EditAppointmentForm = ({ appointment }) => {
 
                 <label className="form__label" htmlFor="appointment-time">
                     Time:</label>
-                <input
-                    className={`form__input ${validTimeClass}`}
-                    id="assignment-time"
-                    name="time"
-                    type="text"
-                    autoComplete="off"
-                    value={time}
-                    onChange={onTimeChanged}
-                />
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                        className={`form__input--time ${validTimeClass}`}
+                        id="assignment-time"
+                        name="time"
+                        type="text"
+                        autoComplete="off"
+                        onChange={(newValue) => setTime(newValue)}
+                    />
+                </LocalizationProvider>
 
                 <div className="form__divider">
                     <div className="form__action-buttons">
@@ -107,13 +112,16 @@ const EditAppointmentForm = ({ appointment }) => {
                             disabled={!canSave}
                         >
                             <FontAwesomeIcon icon={faSave} />
+                            Save
                         </button>
+
                         <button
                             className="icon-button"
                             title="Delete"
                             onClick={onDeleteNoteClicked}
                         >
                             <FontAwesomeIcon icon={faTrashCan} />
+                            Delete
                         </button>
                     </div> 
                 </div>
