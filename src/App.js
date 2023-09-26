@@ -7,6 +7,8 @@ import Welcome from './features/auth/Welcome'
 import AppointmentsList from './features/appointments/AppointmentsList'
 import EditAppointment from './features/appointments/EditAppointment'
 import NewAppointment from './features/appointments/NewAppointment'
+import AppointmentsListAll from './features/appointments/AppointmentsListAll'
+import NewAppointmentAll from './features/appointments/NewAppointmentAll'
 import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin';
 import RequireAuth from './features/auth/RequireAuth'
@@ -27,11 +29,18 @@ function App() {
 
                 <Route index element={<Welcome />} />
 
-                <Route path="appointment">
-                  <Route index element={<AppointmentsList />} />
-                  <Route path=":id" element={<EditAppointment />} />
-                  <Route path="new" element={<NewAppointment />} />
-                </Route>
+                  <Route path="appointment">
+                    <Route index element={<AppointmentsList />} />
+                    <Route path=":id" element={<EditAppointment />} />
+                    <Route path="new" element={<NewAppointment />} />
+                  </Route>
+                    
+                {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}> */}
+                  <Route path="appointment-all">
+                    <Route index element={<AppointmentsListAll />} />
+                    <Route path="new" element={<NewAppointmentAll />} />
+                  </Route>
+                {/* </Route> */}
               
               </Route> {/* End Dash */}
             </Route> {/* End Prefetch */}

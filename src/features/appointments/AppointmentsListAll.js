@@ -1,11 +1,7 @@
 import { useGetAppointmentsQuery } from "./appointmentsApiSlice"
 import Appointment from "./Appointment"
-import useAuth from "../../hooks/useAuth"
 
-const AppointmentsList = () => {
-
-    const { uid, isAdmin } = useAuth()
-
+const AppointmentsListAll = () => {
     const {
         data: appointments,
         isLoading,
@@ -27,17 +23,10 @@ const AppointmentsList = () => {
     }
 
     if (isSuccess) {
-        const { ids, entities } = appointments
-
-        let filteredIds
-        if (isAdmin) {
-            filteredIds = [...ids]
-        } else {
-            filteredIds = ids.filter(appointmentId => entities[appointmentId].user === uid)
-        }
+        const { ids } = appointments
 
         const tableContent = ids?.length
-            ? filteredIds.map(appointmentId => <Appointment key={appointmentId} appointmentId={appointmentId} />)
+            ? ids.map(appointmentId => <Appointment key={appointmentId} appointmentId={appointmentId} />)
             : null
 
         content = (
@@ -59,4 +48,4 @@ const AppointmentsList = () => {
 
     return content
 }
-export default AppointmentsList
+export default AppointmentsListAll

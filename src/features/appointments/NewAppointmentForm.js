@@ -40,6 +40,12 @@ const NewAppointmentForm = ({ users }) => {
         }
     }
 
+    const user_options = users.map(u => {
+        return (
+            <option key={u.uid} value={u.username} > {u.uid} </option >
+        )
+    })
+
     const options = CLINICS.map(opt => {
         return (
             <option key={opt.id} value={opt.name} > {opt.name} </option >
@@ -57,6 +63,22 @@ const NewAppointmentForm = ({ users }) => {
                 <div className="form__clinic-row">
                     <h2>New Appointment</h2>
                 </div>
+                <div className="form__row">
+                    <div className="form__divider">
+                        <label className="form__label form__checkbox-container" htmlFor="appointment-users">
+                            Select User:</label>
+                        <select
+                            id="appointment-users"
+                            name="users"
+                            className="form__select"
+                            value={users}
+                            onChange={onClinicChanged}
+                        >
+                            {user_options}
+                        </select>
+                    </div>
+                </div>
+
                 <div className="form__row">
                     <div className="form__divider">
                         <label className="form__label form__checkbox-container" htmlFor="appointment-clinic">
