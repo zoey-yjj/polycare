@@ -21,7 +21,7 @@ const Appointment = ({ appointmentId }) => {
 
         return (
             <tr className="table__row">
-                <td className="table__cell appointment__username">{appointment.username}</td>
+                <td className="table__cell appointment__userid">{appointment.userid}</td>
                 <td className="table__cell appointment__clinic">{appointment.clinic}</td>
                 <td className="table__cell appointment__time">{time}</td>
 

@@ -33,7 +33,7 @@ const AppointmentsListAll = () => {
             <table className="table table--appointments">
                 <thead className="table__thead">
                     <tr>
-                        <th scope="col" className="table__th appointment__username">Username</th>
+                        <th scope="col" className="table__th appointment__userid">UserID</th>
                         <th scope="col" className="table__th appointment__clinic">Clinic</th>
                         <th scope="col" className="table__th appointment__time">Time</th>
                         <th scope="col" className="table__th appointment__edit">Edit</th>
