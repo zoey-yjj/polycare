@@ -46,7 +46,7 @@
 
 .icon-button:hover,
 .icon-button:focus-visible {
-  transform: scale(1.2);
+  color: purple;
 }
 
 .icon-button[disabled] {
@@ -186,7 +186,7 @@ tr {
   font-size: 1rem;
   width: 100%;
   display: grid;
-  grid-template-columns:  auto auto auto auto;
+  grid-template-columns:  2fr 2fr 3fr 20%;
   color: var(--TABLE-COLOR);
   gap: 0.1em;
 }
@@ -220,16 +220,6 @@ tr {
   background-color: var(--INACTIVE);
 }
 
-/* ||  APPOINTMENT */
-
-.appointment__edit,
-.appointment__time,
-.appointment__clinic,
-.appointment__username {
-  display: none;
-}
-
-
 /* || FORM - GENERAL */
 
 .form {
@@ -237,13 +227,6 @@ tr {
   flex-flow: column nowrap;
   gap: 0.75em;
   max-width: 800px;
-}
-
-.form__checkbox-container {
-  display: flex;
-  align-items: center;
-  width: fit-content;
-  gap: 0.5em;
 }
 
 .form__persist {
@@ -338,11 +321,8 @@ tr {
     font-size: 1.5rem;
   }
 
-  .appointment__edit,
-  .appointment__time,
-  .appointment__clinic,
-  .appointment__username {
-    display: block
+  .table--notes {
+    grid-template-columns: 2fr 2fr 3fr 20%;
   }
 
   .form__action-buttons {

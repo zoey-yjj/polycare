@@ -1,12 +1,16 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { selectAppointmentById } from './appointmentsApiSlice'
+import { useGetAppointmentsQuery } from './appointmentsApiSlice'
+import { memo } from 'react'
 
 const Appointment = ({ appointmentId }) => {
 
-    const appointment = useSelector(state => selectAppointmentById(state, appointmentId))
+    const { appointment } = useGetAppointmentsQuery("appointmentsList", {
+        selectFromResult: ({ data }) => ({
+            appointment: data?.entities[appointmentId]
+        }),
+    })
 
     const navigate = useNavigate()
 
@@ -18,10 +22,10 @@ const Appointment = ({ appointmentId }) => {
         return (
             <tr className="table__row">
                 <td className="table__cell appointment__username">{appointment.username}</td>
-                <td className="table__cell appointment__title">{appointment.clinic}</td>
-                <td className="table__cell appointment__title">{time}</td>
+                <td className="table__cell appointment__clinic">{appointment.clinic}</td>
+                <td className="table__cell appointment__time">{time}</td>
 
-                <td className="table__cell">
+                <td className="table__cell appointment__edit">
                     <button
                         className="icon-button table__button"
                         onClick={handleEdit}
@@ -34,4 +38,7 @@ const Appointment = ({ appointmentId }) => {
 
     } else return null
 }
-export default Appointment
+
+const memoizedAppointment = memo(Appointment)
+
+export default memoizedAppointment

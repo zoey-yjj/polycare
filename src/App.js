@@ -37,12 +37,12 @@ function App() {
                     <Route path="new" element={<NewAppointment />} />
                   </Route>
                     
-                {/* <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}> */}
+                <Route element={<RequireAuth allowedRoles={[ROLES.Admin]} />}>
                   <Route path="appointment-all">
                     <Route index element={<AppointmentsListAll />} />
                     <Route path="new" element={<NewAppointmentAll />} />
                   </Route>
-                {/* </Route> */}
+                </Route>
               
               </Route> {/* End Dash */}
             </Route> {/* End Prefetch */}

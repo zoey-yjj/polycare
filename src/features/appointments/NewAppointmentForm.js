@@ -28,7 +28,7 @@ const NewAppointmentForm = ({ users }) => {
             setClinic('')
             setTime('')
             setUserId('')
-            navigate('/dash/appointment')
+            navigate(-1)
         }
     }, [isSuccess, navigate])
 
@@ -46,7 +46,7 @@ const NewAppointmentForm = ({ users }) => {
 
     const user_options = users.map(u => {
         return (
-            <option key={u.uid} value={u.username} > {u.uid} </option >
+            <option key={u.uid} value={u.uid} > {u.uid} </option >
         )
     })
 

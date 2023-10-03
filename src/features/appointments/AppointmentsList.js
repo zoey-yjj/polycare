@@ -4,7 +4,7 @@ import useAuth from "../../hooks/useAuth"
 
 const AppointmentsList = () => {
 
-    const { uid, isAdmin } = useAuth()
+    const { uid } = useAuth()
 
     const {
         data: appointments,
@@ -12,7 +12,7 @@ const AppointmentsList = () => {
         isSuccess,
         isError,
         error
-    } = useGetAppointmentsQuery(undefined, {
+    } = useGetAppointmentsQuery('appointmentsList', {
         pollingInterval: 15000,
         refetchOnFocus: true,
         refetchOnMountOrArgChange: true
@@ -29,12 +29,7 @@ const AppointmentsList = () => {
     if (isSuccess) {
         const { ids, entities } = appointments
 
-        let filteredIds
-        if (isAdmin) {
-            filteredIds = [...ids]
-        } else {
-            filteredIds = ids.filter(appointmentId => entities[appointmentId].user === uid)
-        }
+        const filteredIds = ids.filter(appointmentId => entities[appointmentId].user === uid)
 
         const tableContent = ids?.length
             ? filteredIds.map(appointmentId => <Appointment key={appointmentId} appointmentId={appointmentId} />)

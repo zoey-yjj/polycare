@@ -5,16 +5,10 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 
 const Prefetch = () => {
+    
     useEffect(() => {
-        console.log('subscribing')
-        const users = store.dispatch(usersApiSlice.endpoints.getUsers.initiate())
-        const appointments = store.dispatch(appointmentsApiSlice.endpoints.getAppointments.initiate())
-
-        return () => {
-            console.log('unsubscribing')
-            users.unsubscribe()
-            appointments.unsubscribe()
-        }
+        store.dispatch(appointmentsApiSlice.util.prefetch('getAppointments', 'appointmentsList', { force: true }))
+        store.dispatch(usersApiSlice.util.prefetch('getUsers', 'usersList', { force: true }))
     }, [])
 
     return <Outlet />

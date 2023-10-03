@@ -1,7 +1,11 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { apiSlice } from "../../app/api/apiSlice"
 
-const appointmentsAdapter = createEntityAdapter()
+const appointmentsAdapter = createEntityAdapter({
+    sortComparer: (a, b) => {
+        b.time.localeCompare(a.time)
+    }
+})
 
 const initialState = appointmentsAdapter.getInitialState()
 

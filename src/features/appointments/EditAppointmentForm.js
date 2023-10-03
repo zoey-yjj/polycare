@@ -35,7 +35,7 @@ const EditAppointmentForm = ({ appointment }) => {
         if (isSuccess || isDelSuccess) {
             setClinic('')
             setTime('')
-            navigate('/dash/appointment')
+            navigate(-1)
         }
 
     }, [isSuccess, isDelSuccess, navigate])
